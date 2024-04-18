@@ -16,7 +16,7 @@ def buscar_dados(ttl='30days'):
 cadastro_populacao_abastecida = pd.read_excel('cadastro_pop_sac_rs.xlsx')
 cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
 
-ano = st.selectbox(['Selecione o ano'], options = sorted(cadastro_populacao_abastecida['Ano de referência']))
+ano = st.selectbox(['Selecione o ano'], options = sorted(cadastro_populacao_abastecida['Ano de referência'].unique()))
 
 filtro_rs_sac = (cadastro_populacao_abastecida['UF']=='RS')&(cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()=='SAC')&(cadastro_populacao_abastecida['Ano de referência']==ano)
 
