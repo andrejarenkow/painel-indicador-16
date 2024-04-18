@@ -1,24 +1,12 @@
 import pandas as pd
 import streamlit as st
 
-
-
-@st.cache_data
-def buscar_dados(ttl='30days'):
-  dados = pd.read_csv('https://sage.saude.gov.br/dados/sisagua/cadastro_populacao_abastecida.zip', sep=';', encoding='latin1')
-  st.success('Banco atualizado!')
-  return dados
-
-#if st.button('Atualizar dados'):
-#  st.cache_data.clear()
-#  cadastro_populacao_abastecida = buscar_dados()
-
 cadastro_populacao_abastecida = pd.read_excel('cadastro_pop_sac_rs.xlsx')
 cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
 
 ano = st.selectbox(label='Selecione o ano', options = sorted(cadastro_populacao_abastecida['Ano de referência'].unique()))
 
-filtro_rs_sac = (cadastro_populacao_abastecida['UF']=='RS')&(cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()=='SAC')&(cadastro_populacao_abastecida['Ano de referência']==ano)
+filtro_rs_sac = (cadastro_populacao_abastecida['Ano de referência']==ano)
 
 cadastro_populacao_abastecida_sac = cadastro_populacao_abastecida[filtro_rs_sac].reset_index(drop=True)
 cadastro_populacao_abastecida_sac['Número de economias residenciais (domicílios permanentes)'] = pd.to_numeric(cadastro_populacao_abastecida_sac['Número de economias residenciais (domicílios permanentes)'])
