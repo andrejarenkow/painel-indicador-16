@@ -1,8 +1,14 @@
 import pandas as pd
 import streamlit as st
 
-cadastro_populacao_abastecida = pd.read_excel('cadastro_pop_sac_rs.xlsx')
-cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
+@st.cache_data
+def buscar_dados(persist=True):
+  dados = pd.read_excel('cadastro_pop_sac_rs.xlsx')
+  dados['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
+
+  return dados
+  
+cadastro_populacao_abastecida = buscar_dados()
 
 ano = st.selectbox(label='Selecione o ano', options = sorted(cadastro_populacao_abastecida['Ano de referência'].unique()))
 
