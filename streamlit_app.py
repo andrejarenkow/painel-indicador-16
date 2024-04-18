@@ -2,12 +2,16 @@ import pandas as pd
 import streamlit as st
 
 
+
 @st.cache_data
 def buscar_dados(ttl='30days'):
   dados = pd.read_csv('https://sage.saude.gov.br/dados/sisagua/cadastro_populacao_abastecida.zip', sep=';', encoding='latin1')
-  st.succes('Banco atualizado!')
+  st.success('Banco atualizado!')
   return dados
 
+if st.button('Atualizar dados'):
+  st.cache_data.clear()
+  cadastro_populacao_abastecida = buscar_dados()
 
 cadastro_populacao_abastecida = buscar_dados()
 cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
