@@ -9,11 +9,11 @@ def buscar_dados(ttl='30days'):
   st.success('Banco atualizado!')
   return dados
 
-if st.button('Atualizar dados'):
-  st.cache_data.clear()
-  cadastro_populacao_abastecida = buscar_dados()
+#if st.button('Atualizar dados'):
+#  st.cache_data.clear()
+#  cadastro_populacao_abastecida = buscar_dados()
 
-cadastro_populacao_abastecida = buscar_dados()
+cadastro_populacao_abastecida = pd.read_excel('cadastro_pop_sac_rs.xlsx')
 cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
 
 ano = st.selectbox(['Selecione o ano'], options = sorted(cadastro_populacao_abastecida['Ano de referência']))
