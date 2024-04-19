@@ -7,8 +7,9 @@ def buscar_dados(persist=True):
   dados['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
 
   return dados
-  
-cadastro_populacao_abastecida = buscar_dados()
+
+if st.button('Atualizar dados'):
+  cadastro_populacao_abastecida = buscar_dados()
 
 ano = st.selectbox(label='Selecione o ano', options = sorted(cadastro_populacao_abastecida['Ano de referência'].unique()))
 
