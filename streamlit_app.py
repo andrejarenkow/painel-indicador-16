@@ -8,8 +8,9 @@ def buscar_dados(persist=True):
 
   return dados
 
-if st.button('Atualizar dados'):
-  cadastro_populacao_abastecida = buscar_dados()
+dados = pd.read_excel('cadastro_pop_sac_rs.xlsx')
+dados['Tipo da Forma de Abastecimento'] = dados['Tipo da Forma de Abastecimento'].str.strip()
+cadastro_populacao_abastecida = dados.copy()
 
 ano = st.selectbox(label='Selecione o ano', options = sorted(cadastro_populacao_abastecida['Ano de referência'].unique()))
 
