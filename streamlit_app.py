@@ -4,7 +4,7 @@ import streamlit as st
 @st.cache_data
 def buscar_dados(persist=True):
   dados = pd.read_excel('cadastro_pop_sac_rs.xlsx')
-  dados['Tipo da Forma de Abastecimento'] = cadastro_populacao_abastecida['Tipo da Forma de Abastecimento'].str.strip()
+  dados['Tipo da Forma de Abastecimento'] = dados['Tipo da Forma de Abastecimento'].str.strip()
 
   return dados
 
